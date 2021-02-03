@@ -21,6 +21,7 @@
 ;; For treemacs users
 (setq doom-themes-treemacs-theme "doom-colors") ; use the colorful treemacs theme
 (doom-themes-treemacs-config)
+(setq treemacs-user-mode-line-format doom-modeline)
 
 ;; Corrects (and improves) org-mode's native fontification.
 (doom-themes-org-config)
