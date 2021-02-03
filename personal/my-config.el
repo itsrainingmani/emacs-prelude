@@ -15,8 +15,8 @@
 ;; slightly from 0.5s:
 (setq idle-update-delay 1.0)
 
-(global-display-line-numbers-mode)
-(setq display-line-numbers-type 'relative)
+;; (global-display-line-numbers-mode)
+;; (setq display-line-numbers-type 'relative)
 
 ;;
 ;;; Optimizations
@@ -58,6 +58,7 @@
 (add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
 
 (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
+;; (setq neo-window-fixed-size nil)
 (defun neotree-project-dir ()
   "Open NeoTree using the git root."
   (interactive)
@@ -72,6 +73,13 @@
       (message "Could not find git project root."))))
 (global-set-key [f8] 'neotree-project-dir)
 
+;; When running 'projectile-switch-project-action' (C-c p p),
+;; neotree will change root automatically
+(setq projectile-switch-project-action 'neotree-projectile-action)
+(setq neo-smart-open t)
+
+;; Disable the line-numbers minor mode for neotree
+(add-hook 'neo-after-create-hook (lambda (&rest _) (display-line-numbers-mode -1)))
 
 (setq lsp-rust-server 'rust-analyzer)
 
@@ -79,7 +87,7 @@
 (setq prelude-guru nil)
 
 ;; Modeline config
-(setq doom-modeline-height 20)
+(setq doom-modeline-height 15)
 (setq doom-modeline-buffer-file-name-style 'truncate-all)
 (setq doom-modeline-buffer-encoding nil)
 
