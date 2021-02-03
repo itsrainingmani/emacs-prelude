@@ -1,9 +1,29 @@
 ;;; my-config.el --- the heart of the beast -*- lexical-binding: t; -*-
 
+(prelude-require-packages '(doom-modeline doom-themes flycheck-clj-kondo))
+
 (require 'doom-modeline)
 (require 'flycheck-clj-kondo)
+(require 'doom-themes)
 
 (defconst IS-LINUX   (eq system-type 'gnu/linux))
+
+;; Prelude configs
+
+(setq prelude-whitespace nil)
+;; Get rid of the dumb arrow key navigation warnings
+(setq prelude-guru nil)
+(toggle-scroll-bar -1)
+(setq left-margin-width 0)
+
+;;
+;;; Doom Themes Config
+;; For treemacs users
+(setq doom-themes-treemacs-theme "doom-colors") ; use the colorful treemacs theme
+(doom-themes-treemacs-config)
+
+;; Corrects (and improves) org-mode's native fontification.
+(doom-themes-org-config)
 
 ;; Modeline config
 (doom-modeline-mode 1)
@@ -88,9 +108,6 @@
 ;; (add-hook 'neo-after-create-hook (lambda (&rest _) (display-line-numbers-mode -1)))
 
 (setq lsp-rust-server 'rust-analyzer)
-
-;; Get rid of the dumb arrow key navigation warnings
-(setq prelude-guru nil)
 
 ;; Clojure Config
 ;; Enable Fuzzy completion for company when cider-mode is activated
