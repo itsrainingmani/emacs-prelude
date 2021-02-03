@@ -1,12 +1,15 @@
 ;;; my-config.el --- the heart of the beast -*- lexical-binding: t; -*-
 
 (require 'doom-modeline)
-(require 'neotree)
 (require 'flycheck-clj-kondo)
 
 (defconst IS-LINUX   (eq system-type 'gnu/linux))
 
+;; Modeline config
 (doom-modeline-mode 1)
+(setq doom-modeline-height 10)
+(setq doom-modeline-buffer-file-name-style 'truncate-all)
+(setq doom-modeline-buffer-encoding nil)
 
 ;; Make the cursor an i-beam
 (setq-default cursor-type 'bar)
@@ -57,39 +60,37 @@
 ;; Use the all the icons mode for dired since dired-icon-mode is fucking broken
 (add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
 
-(setq neo-theme (if (display-graphic-p) 'icons 'arrow))
-;; (setq neo-window-fixed-size nil)
-(defun neotree-project-dir ()
-  "Open NeoTree using the git root."
-  (interactive)
-  (let ((project-dir (projectile-project-root))
-        (file-name (buffer-file-name)))
-    (neotree-toggle)
-    (if project-dir
-        (if (neo-global--window-exists-p)
-            (progn
-              (neotree-dir project-dir)
-              (neotree-find file-name)))
-      (message "Could not find git project root."))))
-(global-set-key [f8] 'neotree-project-dir)
+;;
+;;; Neotree
 
-;; When running 'projectile-switch-project-action' (C-c p p),
-;; neotree will change root automatically
-(setq projectile-switch-project-action 'neotree-projectile-action)
-(setq neo-smart-open t)
+;; (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
+;; ;; (setq neo-window-fixed-size nil)
+;; (defun neotree-project-dir ()
+;;   "Open NeoTree using the git root."
+;;   (interactive)
+;;   (let ((project-dir (projectile-project-root))
+;;         (file-name (buffer-file-name)))
+;;     (neotree-toggle)
+;;     (if project-dir
+;;         (if (neo-global--window-exists-p)
+;;             (progn
+;;               (neotree-dir project-dir)
+;;               (neotree-find file-name)))
+;;       (message "Could not find git project root."))))
+;; (global-set-key [f8] 'neotree-project-dir)
+
+;; ;; When running 'projectile-switch-project-action' (C-c p p),
+;; ;; neotree will change root automatically
+;; (setq projectile-switch-project-action 'neotree-projectile-action)
+;; (setq neo-smart-open t)
 
 ;; Disable the line-numbers minor mode for neotree
-(add-hook 'neo-after-create-hook (lambda (&rest _) (display-line-numbers-mode -1)))
+;; (add-hook 'neo-after-create-hook (lambda (&rest _) (display-line-numbers-mode -1)))
 
 (setq lsp-rust-server 'rust-analyzer)
 
 ;; Get rid of the dumb arrow key navigation warnings
 (setq prelude-guru nil)
-
-;; Modeline config
-(setq doom-modeline-height 15)
-(setq doom-modeline-buffer-file-name-style 'truncate-all)
-(setq doom-modeline-buffer-encoding nil)
 
 ;; Clojure Config
 ;; Enable Fuzzy completion for company when cider-mode is activated
