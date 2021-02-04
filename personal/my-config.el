@@ -5,6 +5,7 @@
 (require 'doom-modeline)
 (require 'flycheck-clj-kondo)
 (require 'doom-themes)
+;; (require 'dimmer)
 
 (defconst IS-LINUX   (eq system-type 'gnu/linux))
 
@@ -16,20 +17,38 @@
 (toggle-scroll-bar -1)
 (setq left-margin-width 0)
 
+(window-divider-mode)
+;; (set-face-background 'vertical-border "gray")
+;; (set-face-foreground 'vertical-border (face-background 'vertical-border))
+
 ;;
 ;;; Doom Themes Config
 ;; For treemacs users
 (setq doom-themes-treemacs-theme "doom-colors") ; use the colorful treemacs theme
 (doom-themes-treemacs-config)
-(setq treemacs-user-mode-line-format doom-modeline)
+(setq treemacs-user-mode-line-format t)
+(setq doom-themes-treemacs-enable-variable-pitch nil)
+
+(global-set-key (kbd "C-x t t") 'treemacs)
+(global-set-key (kbd "M-0") 'treemacs-select-window)
 
 ;; Corrects (and improves) org-mode's native fontification.
 (doom-themes-org-config)
 
+;;
+;;; Dimmer
+;; (dimmer-configure-which-key)
+;; (dimmer-configure-helm)
+;; (dimmer-configure-company-box)
+;; (dimmer-configure-magit)
+;; (dimmer-configure-hydra)
+;; (dimmer-mode t)
+;; (setq dimmer-fraction 0.6)
+
 ;; Modeline config
 (doom-modeline-mode 1)
 (setq doom-modeline-height 10)
-(setq doom-modeline-buffer-file-name-style 'truncate-all)
+(setq doom-modeline-buffer-file-name-style 'relative-from-project)
 (setq doom-modeline-buffer-encoding nil)
 
 ;; Make the cursor an i-beam
