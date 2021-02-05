@@ -15,7 +15,6 @@
 ;; Get rid of the dumb arrow key navigation warnings
 (setq prelude-guru nil)
 (toggle-scroll-bar -1)
-(setq left-margin-width 0)
 
 (window-divider-mode)
 ;; (set-face-background 'vertical-border "gray")
@@ -30,20 +29,9 @@
 (setq doom-themes-treemacs-enable-variable-pitch nil)
 
 (global-set-key (kbd "C-x t t") 'treemacs)
-(global-set-key (kbd "M-0") 'treemacs-select-window)
 
 ;; Corrects (and improves) org-mode's native fontification.
 (doom-themes-org-config)
-
-;;
-;;; Dimmer
-;; (dimmer-configure-which-key)
-;; (dimmer-configure-helm)
-;; (dimmer-configure-company-box)
-;; (dimmer-configure-magit)
-;; (dimmer-configure-hydra)
-;; (dimmer-mode t)
-;; (setq dimmer-fraction 0.6)
 
 ;; Modeline config
 (doom-modeline-mode 1)
@@ -58,7 +46,9 @@
 ;; slightly from 0.5s:
 (setq idle-update-delay 1.0)
 
-;; (global-display-line-numbers-mode)
+;; Set the left-margin-width to 2 and enable line numbers
+(setq left-margin-width 2)
+(global-display-line-numbers-mode)
 ;; (setq display-line-numbers-type 'relative)
 
 ;;
@@ -99,33 +89,6 @@
 
 ;; Use the all the icons mode for dired since dired-icon-mode is fucking broken
 (add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
-
-;;
-;;; Neotree
-
-;; (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
-;; ;; (setq neo-window-fixed-size nil)
-;; (defun neotree-project-dir ()
-;;   "Open NeoTree using the git root."
-;;   (interactive)
-;;   (let ((project-dir (projectile-project-root))
-;;         (file-name (buffer-file-name)))
-;;     (neotree-toggle)
-;;     (if project-dir
-;;         (if (neo-global--window-exists-p)
-;;             (progn
-;;               (neotree-dir project-dir)
-;;               (neotree-find file-name)))
-;;       (message "Could not find git project root."))))
-;; (global-set-key [f8] 'neotree-project-dir)
-
-;; ;; When running 'projectile-switch-project-action' (C-c p p),
-;; ;; neotree will change root automatically
-;; (setq projectile-switch-project-action 'neotree-projectile-action)
-;; (setq neo-smart-open t)
-
-;; Disable the line-numbers minor mode for neotree
-;; (add-hook 'neo-after-create-hook (lambda (&rest _) (display-line-numbers-mode -1)))
 
 (setq lsp-rust-server 'rust-analyzer)
 
